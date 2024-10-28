@@ -1,0 +1,2 @@
+startup_stm32g474retx.o: \
+ C:/Users/pboon/OneDrive/Desktop/KMUTT/RMX_Lab/FRA231_37_LAB1/EncoderKit/STM32CubeIDE/Application/User/Startup/startup_stm32g474retx.s
