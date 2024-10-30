@@ -80,6 +80,7 @@ for i = 1:3
              'FontSize', text_font_size);
     end
 end
+sgtitle("AMT Position and Velocity of 5 Revolutions");
 
 figure;
 for i = 1:3
@@ -125,3 +126,57 @@ for i = 1:3
              'FontSize', text_font_size);
     end
 end
+sgtitle("BOURNS Position and Velocity of 5 Revolutions");
+
+ppr_amt = 2048;
+ppr_bourns = 24;
+
+means_qei_amt_ppr = means_qei_amt * ppr_amt / (2 * pi);
+means_polling_amt_ppr = means_polling_amt * ppr_amt / (2 * pi);
+means_qei_bourns_ppr = means_qei_bourns * ppr_bourns / (2 * pi);
+means_polling_bourns_ppr = means_polling_bourns * ppr_bourns / (2 * pi);
+
+figure;
+for i = 1:3
+    subplot(2, 3, i);
+    plot(x_axis, means_qei_amt_ppr(i,:), 'bo', 'MarkerSize', 10, 'MarkerFaceColor', 'b');
+    if i == 3
+        title('AMT QEI pos\_X4 in PPR');
+    else
+        title(['AMT QEI pos\_X', num2str(i), ' in PPR']);
+    end
+    xlabel('Revolution');
+    ylabel('Position (PPR)');
+    grid on;
+    xlim([min(x_axis)-1, max(x_axis)+1]);
+    ylim([min(means_qei_amt_ppr(i,:))-5, max(means_qei_amt_ppr(i,:))+5]);
+
+    for j = 1:length(x_axis)
+        text(x_axis(j), means_qei_amt_ppr(i,j), sprintf('%.2f', means_qei_amt_ppr(i,j)), ...
+             'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', ...
+             'FontSize', text_font_size);
+    end
+end
+
+for i = 1:3
+    subplot(2, 3, i+3);
+    plot(x_axis, means_qei_bourns_ppr(i,:), 'bo', 'MarkerSize', 10, 'MarkerFaceColor', 'b');
+    if i == 3
+        title('BOURNS QEI pos\_X4 in PPR');
+    else
+        title(['BOURNS QEI pos\_X', num2str(i), ' in PPR']);
+    end
+    xlabel('Revolution');
+    ylabel('Position (PPR)');
+    grid on;
+    xlim([min(x_axis)-1, max(x_axis)+1]);
+    ylim([min(means_qei_bourns_ppr(i,:))-5, max(means_qei_bourns_ppr(i,:))+5]);
+
+    for j = 1:length(x_axis)
+        text(x_axis(j), means_qei_bourns_ppr(i,j), sprintf('%.2f', means_qei_bourns_ppr(i,j)), ...
+             'VerticalAlignment', 'bottom', 'HorizontalAlignment', 'center', ...
+             'FontSize', text_font_size);
+    end
+end
+
+sgtitle("AMT and BOURNS PPR");
